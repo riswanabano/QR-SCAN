@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Demo Café Menu – by Riswana Bano</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --green:#1F4D3A; --green-2:#2E6B52; --saffron:#E8902A; --ink:#1B1F1D; --muted:#5A635E;
+    --bg:#FBFAF6; --card:#FFFFFF; --line:#E6E3DA; --veg:#1E8E3E; --nonveg:#B3261E;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:Inter,system-ui,sans-serif;background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased}
+  .wrap{max-width:560px;margin:0 auto;padding:0 18px 120px}
+  .demo-bar{background:var(--ink);color:#fff;font-size:13px;text-align:center;padding:8px 12px}
+  header{background:var(--green);color:#fff;padding:28px 18px 26px;border-radius:0 0 28px 28px}
+  header .inner{max-width:560px;margin:0 auto}
+  .tag{display:inline-block;background:rgba(255,255,255,.14);padding:5px 12px;border-radius:999px;font-size:12px;letter-spacing:1.5px;font-weight:600}
+  h1{font-family:Outfit,Inter,sans-serif;font-size:34px;line-height:1.1;margin:14px 0 6px}
+  .sub{margin:0;color:#D6E6DD;font-size:15px}
+  .info{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+  .pill{background:#fff;color:var(--green);font-size:13px;font-weight:600;padding:8px 12px;border-radius:12px;display:flex;align-items:center;gap:6px}
+  .pill svg{width:16px;height:16px}
+  .actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px}
+  .btn{display:flex;align-items:center;justify-content:center;gap:8px;min-height:46px;border-radius:14px;font-weight:600;font-size:15px;text-decoration:none;border:0;cursor:pointer}
+  .btn-primary{background:var(--saffron);color:#1B1F1D}
+  .btn-ghost{background:rgba(255,255,255,.12);color:#fff;border:1px solid rgba(255,255,255,.35)}
+  .special{margin:20px 0 6px;background:#FFF3E3;border:1px solid #F4D2A8;border-radius:18px;padding:16px;display:flex;justify-content:space-between;align-items:center;gap:12px}
+  .special b{display:block;font-family:Outfit,Inter,sans-serif;font-size:18px}
+  .special small{color:#7A4A12;font-weight:600;font-size:12px;letter-spacing:1px}
+  .special .price{font-family:Outfit,Inter,sans-serif;font-size:22px;color:var(--green);font-weight:700;white-space:nowrap}
+  .search{margin:16px 0 10px;position:relative}
+  .search input{width:100%;min-height:46px;border:1px solid var(--line);border-radius:14px;padding:0 14px 0 42px;font-size:15px;font-family:inherit;background:#fff}
+  .search svg{position:absolute;left:14px;top:50%;transform:translateY(-50%);width:18px;height:18px;color:var(--muted)}
+  .chips{display:flex;gap:8px;overflow-x:auto;padding:4px 0 10px;scrollbar-width:none;position:sticky;top:0;background:var(--bg);z-index:5}
+  .chips::-webkit-scrollbar{display:none}
+  .chip{flex:0 0 auto;min-height:40px;padding:0 16px;border-radius:999px;border:1px solid var(--line);background:#fff;font-family:inherit;font-size:14px;font-weight:600;color:var(--ink);cursor:pointer}
+  .chip[aria-pressed="true"]{background:var(--green);color:#fff;border-color:var(--green)}
+  .vegtoggle{display:flex;align-items:center;gap:8px;font-size:14px;font-weight:500;color:var(--muted);margin:2px 0 6px}
+  .vegtoggle input{width:18px;height:18px;accent-color:var(--veg)}
+  h2{font-family:Outfit,Inter,sans-serif;font-size:21px;margin:22px 0 10px}
+  .item{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px 16px;display:flex;justify-content:space-between;gap:14px;margin-bottom:10px}
+  .item h3{margin:0;font-size:16px;font-weight:600;display:flex;align-items:center;gap:8px}
+  .item p{margin:5px 0 0;color:var(--muted);font-size:13.5px;line-height:1.4}
+  .item .price{font-family:Outfit,Inter,sans-serif;font-weight:700;font-size:17px;white-space:nowrap;color:var(--green)}
+  .mark{width:14px;height:14px;border:2px solid currentColor;border-radius:3px;display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto}
+  .mark::after{content:"";width:6px;height:6px;border-radius:50%;background:currentColor}
+  .mark.veg{color:var(--veg)} .mark.nonveg{color:var(--nonveg)}
+  .badge{font-size:11px;font-weight:700;color:#7A4A12;background:#FFE8C7;padding:2px 7px;border-radius:6px;letter-spacing:.5px}
+  .empty{color:var(--muted);text-align:center;padding:30px 0}
+  .visit{margin-top:26px;background:#fff;border:1px solid var(--line);border-radius:18px;padding:18px}
+  .visit h2{margin-top:0}
+  .visit p{margin:6px 0;color:var(--muted);font-size:14.5px}
+  .credit{margin-top:22px;background:var(--ink);color:#fff;border-radius:18px;padding:18px;text-align:center}
+  .credit p{margin:0 0 4px;font-size:14px;color:#C9CFCB}
+  .credit b{display:block;font-family:Outfit,Inter,sans-serif;font-size:19px;margin-bottom:12px}
+  .credit a{display:inline-flex;min-height:44px;align-items:center;padding:0 18px;border-radius:12px;background:var(--saffron);color:#1B1F1D;font-weight:700;text-decoration:none}
+  .floating{position:fixed;left:0;right:0;bottom:0;padding:12px 18px calc(12px + env(safe-area-inset-bottom));background:linear-gradient(to top,var(--bg) 70%,rgba(251,250,246,0))}
+  .floating .btn{max-width:560px;margin:0 auto;box-shadow:0 6px 18px rgba(0,0,0,.12)}
+</style>
+</head>
+<body>
+<div class="demo-bar">Sample menu page (demo). Café name and prices are examples.</div>
+<header>
+  <div class="inner">
+    <span class="tag">MALVIYA NAGAR · JAIPUR</span>
+    <h1>The Courtyard Café</h1>
+    <p class="sub">Coffee, comfort food &amp; good conversations</p>
+    <div class="info">
+      <span class="pill"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg>Open 10 am – 11 pm</span>
+      <span class="pill" id="openNow">Open now</span>
+      <span class="pill">Pure veg options</span>
+    </div>
+    <div class="actions">
+      <a class="btn btn-primary" href="https://wa.me/919509184378?text=Hi%2C%20I%27d%20like%20to%20order%20from%20the%20menu" rel="noopener">
+        <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 0 1-13.4 7.8L3 21l1.3-4.4A9 9 0 1 1 21 12z"></path></svg>
+        Order on WhatsApp</a>
+      <a class="btn btn-ghost" href="#visit">
+        <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"></path><circle cx="12" cy="10" r="2.5"></circle></svg>
+        Location</a>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="special">
+    <div><small>TODAY'S SPECIAL</small><b>Hazelnut Cold Brew + Brownie</b></div>
+    <span class="price">₹299</span>
+  </div>
+
+  <div class="search">
+    <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.5-3.5"></path></svg>
+    <label for="q" style="position:absolute;left:-9999px">Search the menu</label>
+    <input id="q" type="search" placeholder="Search dishes, e.g. pasta, chai…">
+  </div>
+
+  <div class="chips" id="chips" role="toolbar" aria-label="Menu categories"></div>
+  <label class="vegtoggle"><input type="checkbox" id="vegOnly"> Show veg only</label>
+
+  <div id="menu"></div>
+
+  <section class="visit" id="visit">
+    <h2>Visit us</h2>
+    <p>Near Malviya Nagar, Jaipur (example address)</p>
+    <p>Open daily, 10 am – 11 pm</p>
+    <p>Call / WhatsApp: 95091 84378</p>
+  </section>
+
+  <section class="credit">
+    <p>Own a café or restaurant in Jaipur?</p>
+    <b>Get a menu page like this, with a QR code for your tables</b>
+    <a href="https://wa.me/919509184378?text=Hi%20Riswana%2C%20I%20want%20a%20menu%20page%20for%20my%20caf%C3%A9" rel="noopener">WhatsApp Riswana · 95091 84378</a>
+  </section>
+</main>
+
+<div class="floating">
+  <a class="btn btn-primary" href="https://wa.me/919509184378?text=Hi%2C%20I%27d%20like%20to%20order%20from%20the%20menu" rel="noopener">Order on WhatsApp</a>
+</div>
+
+<script>
+const MENU = [
+  {cat:"Coffee & Chai", items:[
+    {n:"Masala Chai", d:"Kadak chai with ginger & cardamom", p:80, v:true},
+    {n:"Cappuccino", d:"Double shot, velvety milk foam", p:160, v:true},
+    {n:"Hazelnut Latte", d:"Smooth latte with hazelnut syrup", p:210, v:true, b:"BESTSELLER"},
+    {n:"Classic Cold Coffee", d:"Thick, creamy and chilled", p:180, v:true}
+  ]},
+  {cat:"Sandwiches & Snacks", items:[
+    {n:"Paneer Tikka Sandwich", d:"Grilled, with mint mayo", p:190, v:true, b:"BESTSELLER"},
+    {n:"Veg Club Sandwich", d:"Triple-layer, served with chips", p:170, v:true},
+    {n:"Peri Peri Fries", d:"Crispy fries, spicy peri peri", p:150, v:true},
+    {n:"Chicken Tikka Wrap", d:"Smoky chicken, onion, mint sauce", p:230, v:false}
+  ]},
+  {cat:"Pizza & Pasta", items:[
+    {n:"Margherita Pizza", d:"Classic tomato, mozzarella, basil", p:299, v:true},
+    {n:"Farmhouse Pizza", d:"Capsicum, onion, corn, mushroom", p:349, v:true},
+    {n:"Pink Sauce Pasta", d:"Penne in creamy tomato sauce", p:279, v:true},
+    {n:"Chicken Alfredo Pasta", d:"Creamy white sauce, grilled chicken", p:329, v:false}
+  ]},
+  {cat:"Shakes", items:[
+    {n:"Oreo Shake", d:"Blended with vanilla ice cream", p:199, v:true},
+    {n:"Mango Smoothie", d:"Seasonal mango, yoghurt, honey", p:189, v:true}
+  ]},
+  {cat:"Desserts", items:[
+    {n:"Brownie with Ice Cream", d:"Warm chocolate brownie", p:199, v:true},
+    {n:"Gulab Jamun Cheesecake", d:"Desi twist on a classic", p:229, v:true, b:"NEW"}
+  ]}
+];
+
+let active = "All";
+const chips = document.getElementById("chips");
+const menuEl = document.getElementById("menu");
+const q = document.getElementById("q");
+const vegOnly = document.getElementById("vegOnly");
+
+function esc(s){return s.replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));}
+
+function renderChips(){
+  const cats = ["All", ...MENU.map(m=>m.cat)];
+  chips.innerHTML = cats.map(c=>`<button class="chip" type="button" aria-pressed="${c===active}" data-cat="${esc(c)}">${esc(c)}</button>`).join("");
+}
+function renderMenu(){
+  const term = q.value.trim().toLowerCase();
+  let html = "";
+  MENU.forEach(sec=>{
+    if(active!=="All" && sec.cat!==active) return;
+    const items = sec.items.filter(it=>(!vegOnly.checked || it.v) && (!term || (it.n+" "+it.d).toLowerCase().includes(term)));
+    if(!items.length) return;
+    html += `<h2>${esc(sec.cat)}</h2>` + items.map(it=>`
+      <div class="item">
+        <div>
+          <h3><span class="mark ${it.v?"veg":"nonveg"}" role="img" aria-label="${it.v?"Veg":"Non-veg"}"></span>${esc(it.n)}${it.b?` <span class="badge">${it.b}</span>`:""}</h3>
+          <p>${esc(it.d)}</p>
+        </div>
+        <span class="price">₹${it.p}</span>
+      </div>`).join("");
+  });
+  menuEl.innerHTML = html || `<p class="empty">No dishes match your search.</p>`;
+}
+chips.addEventListener("click",e=>{
+  const b = e.target.closest(".chip"); if(!b) return;
+  active = b.dataset.cat; renderChips(); renderMenu();
+});
+q.addEventListener("input",renderMenu);
+vegOnly.addEventListener("change",renderMenu);
+
+(function(){
+  const h = new Date().getHours();
+  const el = document.getElementById("openNow");
+  const open = h>=10 && h<23;
+  el.textContent = open ? "Open now" : "Closed now";
+  el.style.color = open ? "#1E8E3E" : "#B3261E";
+})();
+
+renderChips(); renderMenu();
+</script>
+</body>
+</html>
